@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${location.id != null} ? 'Edit Location' : 'Add Location'"></title>
+</head>
+<body>
+<h1 th:text="${location.id != null} ? 'Edit Location' : 'Add Location'"></h1>
+<form th:action="@{/locations/save}" method="post" th:object="${location}">
+    <input type="hidden" th:field="*{id}" />
+    <label for="name">Name:</label>
+    <input type="text" id="name" th:field="*{name}" required />
+    <br/>
+    <label for="country">Country:</label>
+    <input type="text" id="country" th:field="*{country}" />
+    <br/>
+    <label for="sunriseSunsetIds">Associated Sunrise/Sunset Times:</label>
+    <select id="sunriseSunsetIds" th:field="*{sunriseSunsetIds}" multiple>
+        <option th:each="sunTime : ${allSunTimes}"
+                th:value="${sunTime.id}"
+                th:text="${sunTime.date} + ' - ' + ${sunTime.latitude} + ', ' + ${sunTime.longitude}"></option>
+    </select>
+    <br/>
+    <button type="submit">Save</button>
+</form>
+<a th:href="@{/locations/list}">Cancel</a>
+</body>
+</html>

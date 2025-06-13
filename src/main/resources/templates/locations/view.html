@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Location Details</title>
+</head>
+<body>
+<h1>Location: <span th:text="${location.name}"></span></h1>
+<p>Country: <span th:text="${location.country}"></span></p>
+<h2>Associated Sunrise/Sunset Times</h2>
+<table>
+    <thead>
+    <tr>
+        <th>Date</th>
+        <th>Sunrise</th>
+        <th>Sunset</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="sunTime : ${sunTimes}">
+        <td th:text="${sunTime.date}"></td>
+        <td th:text="${sunTime.sunrise}"></td>
+        <td th:text="${sunTime.sunset}"></td>
+    </tr>
+    </tbody>
+</table>
+<a th:href="@{/locations/list}">Back to List</a>
+</body>
+</html>
